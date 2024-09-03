@@ -6,10 +6,14 @@ import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbS
 import { Input } from "@/components/ui/input"
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuItem } from "@/components/ui/dropdown-menu"
 import { JSX, SVGProps } from "react"
+import { getKindeServerSession, LoginLink } from "@kinde-oss/kinde-auth-nextjs/server"
+import { UserNav } from "./UserNav"
 
-const Navbar = () => {
+const Navbar = async() => {
+    const { getUser } = getKindeServerSession()
+    const user = await getUser()
     return (
-        <div className='w-full h-16 bg-muted/80 flex items-center border-b-2 px-4'>
+        <div className='w-full h-14 bg-card flex items-center border-b-2 px-4'>
             <Sheet>
                 <SheetTrigger asChild>
                     <Button size="icon" variant="outline" className="sm:hidden">
@@ -105,28 +109,19 @@ const Navbar = () => {
                     className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[336px]"
                 />
             </div>
-            <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                    <Button variant="outline" size="icon" className="overflow-hidden rounded-full">
-                        <img
-                            src={`https://avatar.vercel.sh/Anas`}
-                            width={36}
-                            height={36}
-                            alt="Avatar"
-                            className="overflow-hidden rounded-full"
-                            style={{ aspectRatio: "36/36", objectFit: "cover" }}
-                        />
-                    </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem>Settings</DropdownMenuItem>
-                    <DropdownMenuItem>Support</DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem>Logout</DropdownMenuItem>
-                </DropdownMenuContent>
-            </DropdownMenu>
+            {!user ? (
+                <Button size={"sm"} asChild>
+                    <LoginLink>Sign in</LoginLink>
+                </Button>
+            ) : (
+                <UserNav
+                    email={user.email as string}
+                    name={user.given_name as string}
+                    userImage={
+                        user.picture ?? `https://avatar.vercel.sh/${user.given_name}`
+                    }
+                />
+            )}
         </div>
     )
 }

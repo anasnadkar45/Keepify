@@ -8,7 +8,7 @@ const Navbar = async() => {
     const { getUser } = getKindeServerSession()
     const user = await getUser()
     return (
-        <div className='w-full h-16 bg-muted/80 flex justify-between items-center border-b-2 px-4'>
+        <div className='w-full h-14 bg-muted/80 flex justify-between items-center border-b-2 px-4'>
             <h1>Keepify</h1>
             {!user ? (
                 <Button size={"sm"} asChild>
