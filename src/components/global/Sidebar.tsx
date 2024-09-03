@@ -36,7 +36,7 @@ export default function Sidebar() {
   const pathname = usePathname()
 
   return (
-    <aside className={`h-full relative flex flex-col bg-background transition-width duration-300 ease-in-out ${isExpanded ? 'w-44' : 'w-fit'} border-r`}>
+    <aside className={`h-full relative hidden sm:flex flex-col bg-background transition-width duration-300 ease-in-out ${isExpanded ? 'w-44' : 'w-fit'} border-r`}>
       {/* Logo */}
       <div className="border-b h-14 flex p-2">
         <div className={`flex items-center w-full py-2 gap-2 border rounded-md ${isExpanded ? "px-1" : "justify-center"}`}>
