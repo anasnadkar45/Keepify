@@ -22,6 +22,61 @@
   }
 }
 
+/* Base font size for body */
+body {
+  font-size: 16px; /* This is the default size for text */
+}
+
+/* Define font sizes for headings */
+h1 {
+  font-size: 40px;
+}
+
+h2 {
+  font-size: 32px;
+}
+
+h3 {
+  font-size: 28px;
+}
+
+h4 {
+  font-size: 24px;
+}
+
+h5 {
+  font-size: 20px;
+}
+
+h6 {
+  font-size: 16px;
+}
+
+/* Paragraph text */
+p {
+  font-size: 16px; /* Same as the body font size */
+}
+
+/* Small text */
+small {
+  font-size: 14px;
+}
+
+/* Define font sizes for other common text elements */
+blockquote {
+  font-size: 18px;
+}
+
+pre,
+code {
+  font-size: 14px;
+}
+
+a {
+  font-size: 16px;
+}
+
+
 @layer base {
   :root {
     --background: 0, 25%, 97%;

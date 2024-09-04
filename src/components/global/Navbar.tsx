@@ -8,8 +8,9 @@ import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLab
 import { JSX, SVGProps } from "react"
 import { getKindeServerSession, LoginLink } from "@kinde-oss/kinde-auth-nextjs/server"
 import { UserNav } from "./UserNav"
+import { ModeToggle } from "./ModeToggle"
 
-const Navbar = async() => {
+const Navbar = async () => {
     const { getUser } = getKindeServerSession()
     const user = await getUser()
     return (
@@ -101,6 +102,8 @@ const Navbar = async() => {
                         </BreadcrumbItem>
                     </BreadcrumbList>
                 </Breadcrumb> */}
+
+            <ModeToggle />
             <div className="relative ml-auto flex-1 md:grow-0 mr-3">
                 <SearchIcon className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                 <Input
