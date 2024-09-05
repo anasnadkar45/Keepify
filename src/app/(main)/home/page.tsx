@@ -1,63 +1,52 @@
+import prisma from '@/app/lib/db'
+import CreatePlatform from '@/components/forms/platform/CreatePlatform'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/dialog"
-import {
-    Sheet,
-    SheetContent,
-    SheetDescription,
-    SheetHeader,
-    SheetTitle,
-    SheetTrigger,
-} from "@/components/ui/sheet"
+import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
 import { Youtube } from 'lucide-react'
+import Image from 'next/image'
+import { platform } from 'os'
 
+async function getPlatforms(userId: string) {
+    const data = await prisma.platform.findMany({
+        where: {
+            userId: userId,
+        },
+        select: {
+            id: true,
+            name: true,
+            description: true,
+            logo: true,
+            createdAt: true,
+        },
+        orderBy: {
+            createdAt: "desc"
+        }
+    });
 
+    return data;
+}
 
-const HomePage = () => {
+const HomePage = async () => {
+    const { getUser } = getKindeServerSession();
+    const user = await getUser();
+
+    const userId = user.id as string;
+    const platforms = await getPlatforms(userId)
     return (
         <div className='p-2'>
-            {/* <Dialog>
-                <DialogTrigger asChild>
-                    <Button>Open</Button>
-                </DialogTrigger>
-                <DialogContent>
-                    <DialogHeader>
-                        <DialogTitle>Are you absolutely sure?</DialogTitle>
-                        <DialogDescription>
-                            This action cannot be undone. This will permanently delete your account
-                            and remove your data from our servers.
-                        </DialogDescription>
-                    </DialogHeader>
-                </DialogContent>
-            </Dialog>
+            <div className='flex justify-between items-center'>
+                <h2 className='font-bold '>Platforms</h2>
 
-            <Sheet>
-                <SheetTrigger>Open</SheetTrigger>
-                <SheetContent>
-                    <SheetHeader>
-                        <SheetTitle>Are you absolutely sure?</SheetTitle>
-                        <SheetDescription>
-                            This action cannot be undone. This will permanently delete your account
-                            and remove your data from our servers.
-                        </SheetDescription>
-                    </SheetHeader>
-                </SheetContent>
-            </Sheet> */}
-
-            <div className='grid grid-cols-5 gap-3 gap-y-12 pt-10'>
-                {Array.from({length:20}).map((_, i) => (
-                    <div key={i} className='bg-card p-3 relative flex flex-col justify-center min-h-[200px] border-2 rounded-b-lg rounded-r-lg'>
+                <CreatePlatform />
+            </div>
+            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 gap-y-12 pt-10'>
+                {platforms.map((platform) => (
+                    <div key={platform.id} className='bg-card p-3 relative flex flex-col justify-center min-h-[200px] border-2 rounded-b-lg rounded-r-lg'>
                         <div className='w-full flex justify-center'>
-                            <Youtube size={150} className='text-muted' />
+                            <Image src={platform.logo} width={150} height={150} alt={platform.name} />
                         </div>
-                        <h4 className='font-bold'>Youtube</h4>
+                        <h4 className='font-bold'>{platform.name}</h4>
                         <p className='text-muted-foreground'>Size: 20</p>
                         <div className='absolute bg-card border-t-[14px] border-r-2 border-l-2 w-[60%] h-10 -top-10 -left-[1.5px] rounded-t-2xl'></div>
                     </div>

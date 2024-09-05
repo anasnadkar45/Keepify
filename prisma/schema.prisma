@@ -20,15 +20,15 @@ model User {
   firstName    String
   lastName     String
   profileImage String
-  platforms    Platfrom[]
+  platforms    Platform[]
   createdAt    DateTime   @default(now())
 }
 
-model Platfrom {
+model Platform {
   id          String    @id @unique @default(uuid())
   name        String
   description String?
-  logoUrl     String
+  logo        String
   User        User?     @relation(fields: [userId], references: [id])
   userId      String?
   contents    Content[]
@@ -44,6 +44,6 @@ model Content {
   url         String
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
-  Platfrom    Platfrom? @relation(fields: [platfromId], references: [id])
-  platfromId  String?
+  Platform    Platform? @relation(fields: [platformId], references: [id])
+  platformId  String?
 }
