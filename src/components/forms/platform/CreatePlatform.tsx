@@ -26,6 +26,13 @@ import { platformSchema } from "@/app/lib/zodSchemas";
 import { SubmitButton } from "@/components/global/SubmitButtons";
 import { useFormState } from "react-dom";
 
+const predefinedIcons = [
+    "https://img.icons8.com/?size=100&id=25461&format=png&color=000000",
+    // "/icons/icon2.png",
+    // "/icons/icon3.png",
+    // "/icons/icon4.png",
+];
+
 const CreatePlatform = () => {
     const [lastResult, action] = useFormState(AddPlatform, undefined)
     const [image, setImage] = useState<undefined | string>(undefined);
@@ -41,6 +48,10 @@ const CreatePlatform = () => {
         shouldValidate: "onBlur",
         shouldRevalidate: "onInput"
     })
+
+    const handleIconSelect = (icon:string) =>{
+        setImage(icon);
+    }
 
     return (
         <div>
@@ -87,6 +98,19 @@ const CreatePlatform = () => {
                                     defaultValue={fields.logo.initialValue}
                                     value={image}
                                 />
+                                <div className="grid grid-cols-4 gap-4">
+                                    {predefinedIcons.map((icon) => (
+                                        <div key={icon} className={`cursor-pointer ${image === icon ? 'border-2 border-primary' : ''}`} onClick={() => handleIconSelect(icon)}>
+                                            <Image
+                                                src={icon}
+                                                alt="Predefined Icon"
+                                                width={100}
+                                                height={100}
+                                                className="rounded"
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
                                 <UploadDropzone
                                     className="border-accent"
                                     endpoint="imageUploader"
