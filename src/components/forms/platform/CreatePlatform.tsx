@@ -1,7 +1,7 @@
 "use client"
 
 import { AddPlatform } from "@/app/action"
-import { useActionState, useEffect, useState } from "react"
+import { useState } from "react"
 import { toast } from "sonner";
 import { useForm } from '@conform-to/react';
 import {
@@ -20,17 +20,20 @@ import { Textarea } from "@/components/ui/textarea"
 import { UploadDropzone } from "@/lib/uploadthing"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { Plus } from "lucide-react"
 import { parseWithZod } from "@conform-to/zod";
 import { platformSchema } from "@/app/lib/zodSchemas";
 import { SubmitButton } from "@/components/global/SubmitButtons";
 import { useFormState } from "react-dom";
+import NetflixIcon from '../../../../public/netflix.png'
+import YoutubeIcon from '../../../../public/youtube.png'
+import SpotifyIcon from '../../../../public/spotify.png'
+import AmazonPrimeIcon from '../../../../public/amazon-prime-video.png'
 
 const predefinedIcons = [
-    "https://img.icons8.com/?size=100&id=25461&format=png&color=000000",
-    // "/icons/icon2.png",
-    // "/icons/icon3.png",
-    // "/icons/icon4.png",
+    YoutubeIcon,
+    NetflixIcon,
+    SpotifyIcon,
+    AmazonPrimeIcon,
 ];
 
 const CreatePlatform = () => {
@@ -49,21 +52,24 @@ const CreatePlatform = () => {
         shouldRevalidate: "onInput"
     })
 
-    const handleIconSelect = (icon:string) =>{
+    const handleIconSelect = (icon: string) => {
         setImage(icon);
     }
+    
 
     return (
         <div>
             <Sheet>
-                <SheetTrigger>
-                    <Button>Add Platform</Button>
+                <SheetTrigger className="bg-primary text-accent font-semibold p-2 rounded-md ">
+                    Add Platform
                 </SheetTrigger>
                 <SheetContent className="w-full sm:max-w-full lg:max-w-[800px] max-h-[100vh] overflow-y-auto p-4">
                     <SheetHeader>
                         <SheetTitle>Add a new platform!</SheetTitle>
                     </SheetHeader>
-                    <form id={form.id} onSubmit={form.onSubmit} action={action}>
+                    <form id={form.id} onSubmit={() => {
+                        form.onSubmit
+                    }} action={action}>
                         <div className="grid gap-4 py-4">
                             <div className="grid items-center gap-4">
                                 <Label htmlFor="name" className="text-left">
@@ -98,13 +104,13 @@ const CreatePlatform = () => {
                                     defaultValue={fields.logo.initialValue}
                                     value={image}
                                 />
-                                <div className="grid grid-cols-4 gap-4">
+                                <div className="flex items-center gap-4">
                                     {predefinedIcons.map((icon) => (
-                                        <div key={icon} className={`cursor-pointer ${image === icon ? 'border-2 border-primary' : ''}`} onClick={() => handleIconSelect(icon)}>
+                                        <div className={`cursor-pointer ${image === icon.src ? 'border-2 shadow-inner shadow-black p-2 rounded-md bg-muted' : ''}`} onClick={() => handleIconSelect(icon.src)}>
                                             <Image
                                                 src={icon}
                                                 alt="Predefined Icon"
-                                                width={100}
+                                                width={60}
                                                 height={100}
                                                 className="rounded"
                                             />
