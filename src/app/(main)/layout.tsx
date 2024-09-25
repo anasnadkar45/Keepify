@@ -14,7 +14,7 @@ export default function ProjectLayout({
         </aside>
         <div className="flex flex-col flex-1">
           <Navbar />
-          <div className="flex-1 rounded-lg bg-muted/50 border-2 pb-32 lg:pb-0 m-2">
+          <div className="flex-1 rounded-lg bg-background pb-32 lg:pb-0 p-4">
             {children}
           </div>
         </div>

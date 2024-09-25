@@ -1,13 +1,17 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Amaranth, Inter, Lato, Titillium_Web, Urbanist } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "./api/uploadthing/core";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { Toaster } from "@/components/ui/sonner"
+import { cn } from "@/lib/utils";
 
-const inter = Inter({ subsets: ["latin"] });
+const lato = Lato({ weight: "400", subsets: ["latin"] });
+const urbanist = Urbanist({ weight: "400", subsets: ["latin"] });
+const titillium_Web = Titillium_Web({ weight: "400", subsets: ["latin"] });
+export const amaranth = Amaranth({ weight: "400", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -22,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
 
-      <body className={inter.className}>
+      <body className={cn(titillium_Web.className, "bg-background")}>
         <NextSSRPlugin
           routerConfig={extractRouterConfig(ourFileRouter)}
         />
