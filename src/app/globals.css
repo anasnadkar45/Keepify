@@ -24,7 +24,8 @@
 
 /* Base font size for body */
 body {
-  font-size: 16px; /* This is the default size for text */
+  font-size: 16px;
+  /* This is the default size for text */
 }
 
 /* Define font sizes for headings */
@@ -54,7 +55,8 @@ h6 {
 
 /* Paragraph text */
 p {
-  font-size: 16px; /* Same as the body font size */
+  font-size: 16px;
+  /* Same as the body font size */
 }
 
 /* Small text */
@@ -79,7 +81,7 @@ a {
 
 @layer base {
   :root {
-    --background: 220, 14%, 96%;
+    --background: 210, 20%, 94%;
     --foreground: 180, 27%, 24%;
     --card: 0, 0%, 100%;
     --card-foreground: 0 0% 3.9%;
@@ -139,7 +141,34 @@ a {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Customize scrollbar */
+*::-webkit-scrollbar {
+  width: 1px;
+  height: 1px;
+  border-radius: 4px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #09090a;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #5c5c7b;
+  border-radius: 90px;
+  width: 2px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #7878a3;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #10b77f #ffffff00;
 }

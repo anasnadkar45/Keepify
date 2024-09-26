@@ -14,7 +14,7 @@ const Navbar = async () => {
     const { getUser } = getKindeServerSession()
     const user = await getUser()
     return (
-        <div className='w-full h-14 bg-card flex items-center border-b-2 px-4'>
+        <div className='w-full h-14 bg-card flex items-center gap-4 py-2 px-4'>
             <Sheet>
                 <SheetTrigger asChild>
                     <Button size="icon" variant="outline" className="sm:hidden">
@@ -109,7 +109,7 @@ const Navbar = async () => {
                 <Input
                     type="search"
                     placeholder="Search content..."
-                    className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[336px]"
+                    className="w-[300px] rounded-lg bg-background pl-8 md:w-[200px] lg:w-[336px]"
                 />
             </div>
             {!user ? (

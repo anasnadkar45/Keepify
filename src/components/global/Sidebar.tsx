@@ -4,7 +4,7 @@ import Link from "next/link"
 import Logo from '../../icons/logo.svg'
 import Image from "next/image"
 import { useState } from "react"
-import { ArrowLeft, ArrowRight, Book, Heart, Home } from "lucide-react"
+import { ArrowLeft, ArrowRight, Book, BookOpen, Heart, Home } from "lucide-react"
 import { usePathname } from "next/navigation"
 
 const NavLinks = [
@@ -16,9 +16,9 @@ const NavLinks = [
   },
   {
     id: 2,
-    href: '/saved',
-    title: 'Saved',
-    icon: Book,
+    href: '/duas',
+    title: 'Duas',
+    icon: BookOpen,
   },
   {
     id: 3,
@@ -33,9 +33,9 @@ export default function Sidebar() {
   const pathname = usePathname()
 
   return (
-    <aside className={`h-full border-r border-opacity-20 relative hidden sm:flex flex-col bg-card transition-width duration-300 ease-in-out ${isExpanded ? 'w-44' : 'w-fit'}`}>
+    <aside className={`h-full relative hidden sm:flex flex-col bg-card transition-width duration-300 ease-in-out ${isExpanded ? 'w-44' : 'w-fit'}`}>
       {/* Logo */}
-      <div className="border-b border-opacity-60 h-[55px] flex p-2">
+      <div className="h-[55px] flex p-2">
         <div className={`flex items-center w-full py-2 gap-2 rounded-md ${isExpanded ? "px-1" : "justify-center"}`}>
           <Image src={Logo} alt="Keepify" height={40} width={30} />
           <h1 className={`${isExpanded ? 'block' : 'hidden'} text-lg font-extrabold`}><span className="text-primary">Akhira</span> Journey</h1>
@@ -65,7 +65,7 @@ export default function Sidebar() {
         </TooltipProvider>
 
         {/* Toggle Button */}
-        <div className="mt-auto absolute flex justify-center bottom-28 -right-[19px]">
+        <div className="mt-auto absolute flex justify-center top-52 -right-[20px]">
           <button
             onClick={() => setIsExpanded(!isExpanded)}
             className="flex items-center justify-center p-1 rounded-md bg-card border transition-transform hover:bg-card"
