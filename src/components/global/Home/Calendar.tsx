@@ -49,7 +49,7 @@ export default function Calendar() {
   }
 
   return (
-    <Card className="w-full mx-auto bg-card shadow-lg rounded-lg overflow-hidden">
+    <Card className="w-full h-fit mx-auto bg-card shadow-lg rounded-lg overflow-hidden">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 bg-card border-b">
         <CardTitle className="text-lg font-semibold">Calendar</CardTitle>
         <Select

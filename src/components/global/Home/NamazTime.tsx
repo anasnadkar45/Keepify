@@ -175,7 +175,7 @@ export default function NamazTime() {
   }, [nextPrayer, prayerTimings])
 
   return (
-    <Card className="w-full">
+    <Card className="w-full min-h-[600px]">
       <CardHeader>
         <CardTitle className="text-2xl font-bold text-center">Prayer Times</CardTitle>
       </CardHeader>

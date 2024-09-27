@@ -14,7 +14,7 @@ export default function ProjectLayout({
         </aside>
         <div className="flex flex-col flex-1 bg-card">
           <Navbar />
-          <div className="flex-1 rounded-lg p-2">
+          <div className="flex-1 rounded-lg mx-2 md:mr-2 mb-2">
             <div className="bg-background h-full w-full rounded-[20px] p-4">
               {children}
             </div>

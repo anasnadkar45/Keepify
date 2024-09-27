@@ -51,7 +51,7 @@ export default function Sidebar() {
                 <TooltipTrigger asChild>
                   <Link
                     href={link.href}
-                    className={`flex items-center gap-4 p-2 rounded-lg transition-colors hover:text-primary/20 
+                    className={`flex items-center gap-4 p-2 rounded-lg transition-colors hover:text-gray-500
                       ${isActive ? 'text-primary' : 'text-gray-400'}`}
                   >
                     <link.icon className="h-6 w-6" />

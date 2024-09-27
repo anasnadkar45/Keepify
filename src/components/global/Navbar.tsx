@@ -14,7 +14,7 @@ const Navbar = async () => {
     const { getUser } = getKindeServerSession()
     const user = await getUser()
     return (
-        <div className='w-full h-14 bg-card flex items-center gap-4 py-2 px-4'>
+        <div className='w-full h-14 bg-card flex justify-between sm:justify-end items-center gap-4 py-2 px-4'>
             <Sheet>
                 <SheetTrigger asChild>
                     <Button size="icon" variant="outline" className="sm:hidden">
@@ -79,52 +79,31 @@ const Navbar = async () => {
                     </nav>
                 </SheetContent>
             </Sheet>
-            {/* <Breadcrumb className="hidden md:flex">
-                    <BreadcrumbList>
-                        <BreadcrumbItem>
-                            <BreadcrumbLink asChild>
-                                <Link href="#" prefetch={false}>
-                                    Dashboard
-                                </Link>
-                            </BreadcrumbLink>
-                        </BreadcrumbItem>
-                        <BreadcrumbSeparator />
-                        <BreadcrumbItem>
-                            <BreadcrumbLink asChild>
-                                <Link href="#" prefetch={false}>
-                                    Collections
-                                </Link>
-                            </BreadcrumbLink>
-                        </BreadcrumbItem>
-                        <BreadcrumbSeparator />
-                        <BreadcrumbItem>
-                            <BreadcrumbPage>My Playlists</BreadcrumbPage>
-                        </BreadcrumbItem>
-                    </BreadcrumbList>
-                </Breadcrumb> */}
 
-            <ModeToggle />
-            <div className="relative ml-auto flex-1 md:grow-0 mr-3">
+            <div className="flex items-center gap-2">
+                <ModeToggle />
+                {/* <div className="relative ml-auto flex-1 md:grow-0 mr-3">
                 <SearchIcon className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                 <Input
                     type="search"
                     placeholder="Search content..."
                     className="w-[300px] rounded-lg bg-background pl-8 md:w-[200px] lg:w-[336px]"
                 />
+            </div> */}
+                {!user ? (
+                    <Button size={"sm"} asChild>
+                        <LoginLink>Sign in</LoginLink>
+                    </Button>
+                ) : (
+                    <UserNav
+                        email={user.email as string}
+                        name={user.given_name as string}
+                        userImage={
+                            user.picture ?? `https://avatar.vercel.sh/${user.given_name}`
+                        }
+                    />
+                )}
             </div>
-            {!user ? (
-                <Button size={"sm"} asChild>
-                    <LoginLink>Sign in</LoginLink>
-                </Button>
-            ) : (
-                <UserNav
-                    email={user.email as string}
-                    name={user.given_name as string}
-                    userImage={
-                        user.picture ?? `https://avatar.vercel.sh/${user.given_name}`
-                    }
-                />
-            )}
         </div>
     )
 }
